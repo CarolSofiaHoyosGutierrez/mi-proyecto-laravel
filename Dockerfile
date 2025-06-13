@@ -1,24 +1,8 @@
-FROM php:8.1-fpm
+FROM php:8.1-fpm-alpine
 
-# Instalar dependencias
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    nodejs \
-    npm
-
-# Instalar extensiones PHP
-RUN docker-php-ext-install pdo mbstring exif pcntl bcmath gd
-
-# Instalar extensión PostgreSQL
-RUN apt-get install -y libpq-dev \
-    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo pdo_pgsql pgsql
+# Instalar extensiones PHP y PostgreSQL
+RUN apk add --no-cache postgresql-dev \
+    && docker-php-ext-install pdo pdo_pgsql
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -29,22 +13,11 @@ WORKDIR /var/www/html
 # Copiar archivos del proyecto
 COPY . .
 
-# Instalar dependencias de Composer
-RUN composer install --no-dev --optimize-autoloader
-
-# Instalar dependencias de Node.js
-RUN npm install && npm run build
+# Instalar dependencias de Composer (sin ejecutar scripts)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Configurar permisos
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Generar clave de la aplicación si no existe
-RUN php artisan key:generate --force
-
-# Optimizar la aplicación
-RUN php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan view:cache
+RUN chmod -R 775 storage bootstrap/cache
 
 # Exponer puerto
 EXPOSE 8000
