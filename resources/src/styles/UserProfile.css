@@ -1,0 +1,91 @@
+/* UserProfile.css */
+
+.profile-background {
+    color: #000;
+  min-height: 100vh;
+  background-color: #e1c699;
+  background-image: url('../../../public/img/perfilback.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding-top: 4rem;
+}
+
+/* Tarjeta con efecto glass */
+.profile-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 2.5rem;
+  max-width: 750px;
+  width: 95%;
+  text-align: center;
+}
+
+/* Imagen o avatar redondo */
+.profile-avatar {
+  width: 140px;
+  color:azure;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid whitesmoke;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  display: block;
+  margin: 0 auto;
+}
+.user-role-badge {
+  
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  color: black;
+  font-weight: bold;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  justify-content: center;
+  max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.2s ease;
+}
+
+.user-role-badge:hover {
+  transform: scale(1.05);
+}
+
+.user-role-icon {
+  font-size: 1.1rem;
+}
+/* En UserProfile.css */
+.btn-guardar {
+  background: linear-gradient(to right, #a2231d, #ef4444);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-guardar:hover {
+  background: linear-gradient(to right, #b91c1c, #dc2626);
+  transform: scale(1.05);
+}
+
+.icono-btn {
+  font-size: 1.1rem;
+}
+
